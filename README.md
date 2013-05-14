@@ -3,11 +3,15 @@
   vagrant-box-updater - Vagrant plugin to monitor and notify about updates of remote box images
 
   By default Vagrant just store box image to localdisk (during box add) and never checks if there are updates for that image, so users may end up working with outdated boxes.
+
   This plugin ment to notify user about new versions of remote box images available, and provide functionality to download updates. 
   Plugin save additional box data and every time "vagrant up" called - checks if remote updates available
   
+
   vagrant plugin hooks into :
+
 	"vagrant box add" - save details about remote box image: image creation timestamp, image source path (box data stored in yaml format inside ~/.vagrant.d/$box_name.stat);
+
 	"vagrant up" -	checks source box url for updates (use remote file modification date to define whether image updated or not), 
 					when update found - print message and optionally perform interactive download.
  
