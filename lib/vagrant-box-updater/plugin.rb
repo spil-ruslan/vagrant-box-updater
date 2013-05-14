@@ -16,7 +16,7 @@ module VagrantPlugins
 
       action_hook 'on_update' do |hook|
         require_relative 'action/add_box'
-        hook.before ::Vagrant::Action::Builtin::BoxAdd, VagrantPlugins::BoxUpdater::Action::AddBox
+        hook.after ::Vagrant::Action::Builtin::BoxAdd, VagrantPlugins::BoxUpdater::Action::AddBox
       end
 
     end
