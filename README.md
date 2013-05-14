@@ -1,10 +1,10 @@
-# Vagrant::BoxUpdater
+# vagrant-box-updater
 
   vagrant-box-updater - Vagrant plugin to monitor and notify about updates of remote box images
 
   By default Vagrant just store box image to localdisk (during box add) and never checks if there are updates for that image, so users may end up working with outdated boxes.
 
-  This plugin ment to notify user about new versions of remote box images available, and provide functionality to download updates. 
+  This plugin ment to notify user about new versions of remote box images available, and provide interactive prompt to download updates. 
   Plugin save additional box data and every time "vagrant up" called - checks if remote updates available
   
 
@@ -18,9 +18,9 @@
 
 ## Installation
 
-1) Clone project
-2) run "rake build" - this should create gem file
-3) install plugin to vagrant environment "sudo vagrant  plugin install pkg/vagrant-box-updater-0.0.1.gem" 
+1. Clone project
+2. run "rake build" - this should create gem file
+3. install plugin to vagrant environment "sudo vagrant  plugin install pkg/vagrant-box-updater-0.0.1.gem" 
 
 ## Usage
 
