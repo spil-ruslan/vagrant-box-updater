@@ -5,6 +5,7 @@
   By default Vagrant just store box image to localdisk (during box add) and never checks if there are updates for that image, so users may end up working with outdated boxes.
 
   This plugin ment to notify user about new versions of remote box images available, and provide interactive prompt to download updates. 
+
   Plugin save additional box data and every time "vagrant up" called - checks if remote updates available
   
 
