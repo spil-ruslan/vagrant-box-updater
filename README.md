@@ -17,8 +17,16 @@
 
 ## Installation
 
+Note: plugin is written for Vagrant version 1.1 and higher
+
+To install from gem repository:
+
+vagrant plugin install vagrant-box-updater
+
+To install from source code:
+
 1. Clone project
-2. run "rake build" - this should create gem file
+2. run "rake build" - should create gem file
 3. install plugin to vagrant environment "sudo vagrant  plugin install pkg/vagrant-box-updater-0.0.1.gem" 
 
 ## Usage
