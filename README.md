@@ -23,6 +23,8 @@
 
 ## Usage
 
+After plugin installed it's recommended to re-add box images (vagrant box add -f ) so plugin can collect necessary information about box (such as source url and creation timestamp).
+
 It is possible to disable plugin by adding configuration parameter to Vagrantfile:
 
 config.box_updater.disable = true
