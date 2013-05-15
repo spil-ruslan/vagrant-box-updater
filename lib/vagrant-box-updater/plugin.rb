@@ -1,6 +1,6 @@
 module VagrantPlugins
   module BoxUpdater
-    class Plugin < Vagrant.plugin(2)
+    class Plugin < Vagrant.plugin('2')
       name 'Vagrant BoxUpdater'
       description 'Plugin allows to check source box for updates and interactively prompt user when update is available.'
 
