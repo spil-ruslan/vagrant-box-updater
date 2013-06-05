@@ -1,58 +1,52 @@
 # vagrant-box-updater
 
-vagrant-box-updater - Vagrant (version 1.1+) plugin  save details
-about box images, checks remote box images for updates, notify user and
-perform interactive update
+Vagrant 1.1+ plugin to detect changes to a remote box's creation date,
+and perform an interactive update if desired.
 
-By default Vagrant just store box image to localdisk (during box add)
-and never checks if there are updates for that image, so users may end
-up working with outdated boxes.
+By default Vagrant just store box images locally and never checks if
+there are updates for that image. Users may therefore end up working
+with outdated boxes.
 
-This plugin meant to notify user about new versions of remote box
-images available, and provide interactive prompt to download updates. 
-
-
-vagrant plugin hooks into :
-
-  "vagrant box add" - save details about remote box image: image
-creation timestamp, image source path (box data stored in yaml format
-inside ~/.vagrant.d/$box_name.stat);
-
-  "vagrant up" -	checks source box url for updates (use remote file
-modification date to define whether image updated or not), when update
-found - print message and optionally perform interactive download.
- 
+This plugin hooks into `vagrant box add` and `vagrant up`, saving
+details about each box sources creation date, and optioning performing
+an update when a change is detected.
 
 ## Installation
 
-Note: plugin is written for Vagrant version 1.1 and higher
-
-To install from gem repository:
-
-vagrant plugin install vagrant-box-updater
-
-To install from source code:
-
-1. Clone project
-2. run "rake build" - should create gem file
-3. install plugin to vagrant environment "sudo vagrant  plugin install
-   pkg/vagrant-box-updater-0.0.1.gem" 
+    vagrant plugin install vagrant-box-updater
 
 ## Usage
 
-After plugin installed it's recommended to re-add box images (vagrant
-box add -f ) so plugin can collect necessary information about box (such
-as source url and creation timestamp).
+After plugin installed it's recommended to re-add box images so that the
+plugin can collect necessary information about the box.
 
-It is possible to disable plugin by adding configuration parameter to
-Vagrantfile:
+    vagrant box add --force <source_uri>
 
-config.box_updater.disable = true
+To disable the plugin for a project:
+
+```ruby
+Vagrant.configure("2") do |config|
+  config.vm.box = "precise64"
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+
+  config.box_updater.disable = true
+
+  // ...
+
+end
+```
+
+## Install from source (Advanced)
+
+1. Clone project
+2. Create a gem file: `rake build`
+3. Install local gem: `vagrant plugin install pkg/vagrant-box-updater-0.0.1.gem`
+
 
 ## Contributing
 
 1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
 5. Create new Pull Request
