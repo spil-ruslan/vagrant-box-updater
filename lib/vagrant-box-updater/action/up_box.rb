@@ -68,23 +68,21 @@ module VagrantPlugins
             return 0
           end
 
-              env[:ui].info("Verify remote image data: #{box_url}")
-	      remote_modification_attribute = Util::Common.get_modification_attribute(box_url)
-#          begin
-#              env[:ui].info("Verify remote image data: #{box_url}")
-#	      remote_modification_attribute = Util::Common.get_modification_attribute(path_box_stat_file, box_url)
-#          rescue 
-#              env[:ui].warn("Unable access: #{box_url}")
-#              env[:ui].warn("Skip remote box check")
-#              #@app.call(env)
-#              return 0
-#          end
+          begin
+            env[:ui].info("Verify remote image data: #{box_url}")
+            remote_modification_attribute = Util::Common.get_modification_attribute(box_url)
+          rescue 
+            env[:ui].warn("Unable access: #{box_url}")
+            env[:ui].warn("Skip remote box check")
+            @app.call(env)
+            return 0
+          end
 
           if remote_modification_attribute['Last-Modified'] == nil
-              env[:ui].warn("Can not retrieve any useful data for: #{box_url}")
-              env[:ui].warn("Skip remote box check")
-              #@app.call(env)
-              return 0
+            env[:ui].warn("Can not retrieve any useful data for: #{box_url}")
+            env[:ui].warn("Skip remote box check")
+            @app.call(env)
+            return 0
           end
           remote_modification_timestamp = remote_modification_attribute['Last-Modified'].is_a?(Time) ? remote_modification_attribute['Last-Modified'] : Time.parse(remote_modification_attribute['Last-Modified'])
           current_modification_timestamp = current_modification_date.is_a?(Time) ? current_modification_date : Time.parse(current_modification_date)
