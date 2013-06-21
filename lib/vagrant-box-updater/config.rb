@@ -1,8 +1,7 @@
 module VagrantPlugins
   module BoxUpdater
     class Config < Vagrant.plugin('2', :config)
-      attr_accessor :disable
-      attr_accessor :autoupdate
+      attr_accessor :disable, :autoupdate
 
       def initialize
         @disable = false
