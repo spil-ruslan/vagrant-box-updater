@@ -36,6 +36,19 @@ Vagrant.configure("2") do |config|
 end
 ```
 
+To enable automatic updates for a project:
+
+```ruby
+Vagrant.configure("2") do |config|
+  config.vm.box = "precise64"
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+
+  config.box_updater.autoupdate = true
+
+  // ...
+
+end
+```
 ## Install from source (Advanced)
 
 1. Clone project
