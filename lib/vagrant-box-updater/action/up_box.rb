@@ -25,6 +25,8 @@ module VagrantPlugins
             return 0
           end
 
+          enable_autoupdate_flag = env[:machine].config.box_updater.autoupdate
+
           stat_file = env[:home_path].join(box_name + ".stat")
 
           # Create empty stat file if missing 
@@ -96,7 +98,7 @@ module VagrantPlugins
               env[:ui].warn("Modified image detected, this update set to be ignored until next change")
 	    else
               env[:ui].warn("Modified image detected : #{box_stats['url']} #{remote_modification_attribute}")
-	      if ask_confirm(env,"Would you like to update the box? \nIf negative - we keep ignoring this update, and notify only when another update detected. \nType (Y/N)")
+	      if enable_autoupdate_flag == true || ask_confirm(env,"Would you like to update the box? \nIf negative - we keep ignoring this update, and notify only when another update detected. \nType (Y/N)")
                 env[:ui].info("Going to update and replace box \"#{box_name}\" now!")
                 provider = nil
                 env[:action_runner].run(Vagrant::Action.action_box_add, {
