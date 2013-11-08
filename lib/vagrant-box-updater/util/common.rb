@@ -34,8 +34,9 @@ module VagrantPlugins
           else
             ref_modification_attribute = method(:get_url_modification_attribute?)
           end
-            modification_attribute = ref_modification_attribute.call(box_path)
-            return modification_attribute
+
+          modification_attribute = ref_modification_attribute.call(box_path)
+          return modification_attribute
         end
         
         def self.get_url_modification_attribute?(url)
@@ -52,15 +53,17 @@ module VagrantPlugins
           http = Net::HTTP.new(uri.host, uri.port)
           http.use_ssl = (uri.port == 443)
           http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-          
-          if !uri.user.nil?
-            http.basic_auth uri.user, uri.password
+
+          # if we have a user and password then chances are we want to use basic auth
+          if !uri.user.nil? and !uri.password.nil?
+            auth = 'Basic ' + Base64.encode64( "#{uri.user}:#{uri.password}" ).chomp
+            headers = {
+                "Authorization" => auth
+            }
           end
-        
-          #request = Net::HTTP::Get.new(uri.request_uri, { 'User-Agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31' })
-          #response = Net::HTTP.start(uri.host, uri.port) { |http| http.request(request) }
-          #response = http.request(request)
-          response = http.head(uri.request_uri)
+
+          response = http.head(uri.request_uri, headers || nil)
+
           case response
           when Net::HTTPSuccess     then response
           when Net::HTTPRedirection then fetch_url(response['location'], limit - 1)
