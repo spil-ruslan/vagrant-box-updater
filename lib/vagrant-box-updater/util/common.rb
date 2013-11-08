@@ -52,6 +52,10 @@ module VagrantPlugins
           http = Net::HTTP.new(uri.host, uri.port)
           http.use_ssl = (uri.port == 443)
           http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+          
+          if !uri.user.nil?
+            http.basic_auth uri.user, uri.password
+          end
         
           #request = Net::HTTP::Get.new(uri.request_uri, { 'User-Agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31' })
           #response = Net::HTTP.start(uri.host, uri.port) { |http| http.request(request) }
