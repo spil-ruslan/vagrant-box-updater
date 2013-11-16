@@ -38,7 +38,9 @@ module VagrantPlugins
 
           box_stats = YAML.load_file(stat_file)
 
-          box_url = box_stats["url"]
+          if box_url != box_stats["url"]
+            env[:ui].warn("Url changed. Using url:#{box_url}")
+          end
 
           current_modification_date = box_stats["Last-Modified"] 
 	  # "Etag" attribute is not in use - but we may use it in future 
@@ -97,7 +99,7 @@ module VagrantPlugins
 	    if box_stats['ignored_image_attribute'] and box_stats['ignored_image_attribute'].to_i == remote_modification_timestamp.to_i
               env[:ui].warn("Modified image detected, this update set to be ignored until next change")
 	    else
-              env[:ui].warn("Modified image detected : #{box_stats['url']} #{remote_modification_attribute}")
+              env[:ui].warn("Modified image detected : #{box_url} #{remote_modification_attribute}")
 	      if enable_autoupdate_flag == true || ask_confirm(env,"Would you like to update the box? \nIf negative - we keep ignoring this update, and notify only when another update detected. \nType (Y/N)")
                 env[:ui].info("Going to update and replace box \"#{box_name}\" now!")
                 provider = nil
