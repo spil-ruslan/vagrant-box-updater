@@ -4,18 +4,18 @@ module VagrantPlugins
       class Common
 
         def self.get_path_box_stat_file(env, box_name)
-          YAML::ENGINE.yamler='syck'
+          YAML::ENGINE.yamler='psych'
           stat_file = env[:home_path].join(box_name + ".stat")
 	  return stat_file
         end
 
         def self.save_box_stats(stat_file, box_attributes)
-          YAML::ENGINE.yamler='syck'
+          YAML::ENGINE.yamler='psych'
           File.open(stat_file, 'w+') {|f| f.write(box_attributes.to_yaml) }
         end
 
         def self.add_box_stats(stat_file, box_attributes)
-          YAML::ENGINE.yamler='syck'
+          YAML::ENGINE.yamler='psych'
 	  content = YAML.load_file(stat_file)
 	  content = content.merge(box_attributes)
           #env[:ui].info("Save to: #{stat_file}")
@@ -23,7 +23,7 @@ module VagrantPlugins
         end
 
         def self.read_box_stats(stat_file, box_name)
-          YAML::ENGINE.yamler='syck'
+          YAML::ENGINE.yamler='psych'
 	  content = YAML.load_file(stat_file)
 	  return content
         end

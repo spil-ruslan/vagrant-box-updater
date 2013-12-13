@@ -16,7 +16,7 @@ module VagrantPlugins
           require 'time'
           box_name = env[:machine].config.vm.box
           box_url  = env[:machine].config.vm.box_url
-	  path_box_stat_file = Util::Common.get_path_box_stat_file(env, box_name)
+	        path_box_stat_file = Util::Common.get_path_box_stat_file(env, box_name)
 
           disable_plugin_flag = env[:machine].config.box_updater.disable
           if disable_plugin_flag == true
@@ -33,7 +33,7 @@ module VagrantPlugins
           if !File.file?(stat_file)
             env[:ui].info("Local stat file not found: #{stat_file}")
             @box_attributes = {"modification_date" => nil, "url" => box_url}
-	    Util::Common.save_box_stats(path_box_stat_file, @box_attributes)
+	          Util::Common.save_box_stats(path_box_stat_file, @box_attributes)
           end
 
           box_stats = YAML.load_file(stat_file)
@@ -41,9 +41,9 @@ module VagrantPlugins
           box_url = box_stats["url"]
 
           current_modification_date = box_stats["Last-Modified"] 
-	  # "Etag" attribute is not in use - but we may use it in future 
-	  # What we trying to achieve : some public resources such as github.com does not provide "Last-Modified"
-	  # but "Etag" id, so optionally we may need number of generic methods to decide if object modified
+          # "Etag" attribute is not in use - but we may use it in future
+          # What we trying to achieve : some public resources such as github.com does not provide "Last-Modified"
+          # but "Etag" id, so optionally we may need number of generic methods to decide if object modified
           current_modification_etag = box_stats["Etag"] 
 
           if current_modification_date == nil and current_modification_etag != nil
@@ -93,12 +93,13 @@ module VagrantPlugins
           #env[:ui].info("Local box timestamp #{current_modification_timestamp}")
 
           if current_modification_timestamp.to_i < remote_modification_timestamp.to_i
-	    box_stats = Util::Common.read_box_stats(path_box_stat_file, box_name)
-	    if box_stats['ignored_image_attribute'] and box_stats['ignored_image_attribute'].to_i == remote_modification_timestamp.to_i
+	          box_stats = Util::Common.read_box_stats(path_box_stat_file, box_name)
+	          if box_stats['ignored_image_attribute'] and box_stats['ignored_image_attribute'].to_i == remote_modification_timestamp.to_i
               env[:ui].warn("Modified image detected, this update set to be ignored until next change")
-	    else
+	          else
               env[:ui].warn("Modified image detected : #{box_stats['url']} #{remote_modification_attribute}")
-	      if enable_autoupdate_flag == true || ask_confirm(env,"Would you like to update the box? \nIf negative - we keep ignoring this update, and notify only when another update detected. \nType (Y/N)")
+              env[:ui].warn("Your current box was last-modified: #{current_modification_timestamp}")
+	            if enable_autoupdate_flag == true || ask_confirm(env,"Would you like to update the box? \nIf negative - we keep ignoring this update, and notify only when another update detected. \nType (Y/N)")
                 env[:ui].info("Going to update and replace box \"#{box_name}\" now!")
                 provider = nil
                 env[:action_runner].run(Vagrant::Action.action_box_add, {
@@ -110,11 +111,11 @@ module VagrantPlugins
                  })
               else
                 env[:ui].warn("This update will be ignored")   
-	        Util::Common.add_box_stats(path_box_stat_file, {'ignored_image_attribute' => remote_modification_timestamp})
+	              Util::Common.add_box_stats(path_box_stat_file, {'ignored_image_attribute' => remote_modification_timestamp})
                 @app.call(env)
               end
-	    end
-	  else
+	          end
+	        else
             env[:ui].info("Box is uptodate")
           end
 

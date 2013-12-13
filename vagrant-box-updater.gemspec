@@ -6,16 +6,12 @@ require 'vagrant-box-updater/version'
 Gem::Specification.new do |gem|
   gem.name          = "vagrant-box-updater"
   gem.version       = Vagrant::BoxUpdater::VERSION
-  gem.authors       = ["Ruslan Lutsenko"]
-  gem.email         = ["ruslan.lutcenko@gmail.com"]
+  gem.authors       = ["Ruslan Lutsenko", "Alex House"]
+  gem.email         = ["ruslan.lutcenko@gmail.com", "alex.house@performancehorizon.com"]
   gem.description   = "vagrant plugin which save details about added box image (image creation timestamp image source path), during start of virtual machine checks the source url of a box image for updates (use 'Last-Modified' header to detect changes), notify user and perform interactive download of the box image if update detected"
   gem.summary       = "Vagrant plugin to detect and notify on update of remote box images"
-  gem.homepage      = "https://github.com/spil-ruslan/vagrant-box-updater"
+  gem.homepage      = "https://github.com/alexhouse/vagrant-box-updater"
 
-  #gem.files         = `git ls-files`.split($/)
-  #gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
-  #gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  #gem.require_paths = ["lib"]
 	# The following block of code determines the files that should be included
   # in the gem. It does this by reading all the files in the directory where
   # this gemspec is, and parsing out the ignored files from the gitignore.
