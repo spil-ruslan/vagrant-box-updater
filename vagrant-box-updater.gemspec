@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'vagrant-box-updater/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "vagrant-box-updater"
+  gem.name          = "vagrant-box-updater2"
   gem.version       = Vagrant::BoxUpdater::VERSION
   gem.authors       = ["Ruslan Lutsenko", "Alex House"]
   gem.email         = ["ruslan.lutcenko@gmail.com", "alex.house@performancehorizon.com"]
