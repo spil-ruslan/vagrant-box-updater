@@ -18,7 +18,6 @@ module VagrantPlugins
       action_hook(:do_before_boot, :machine_action_up) do |hook|
 	      require_relative 'action/up_box'
         hook.prepend(VagrantPlugins::BoxUpdater::Action::UpBox)
-        hook.prepend(V)
       end
 
       action_hook 'on_update' do |hook|
