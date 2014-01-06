@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'vagrant-box-updater/version'
+require 'vagrant-box-updater2/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "vagrant-box-updater2"

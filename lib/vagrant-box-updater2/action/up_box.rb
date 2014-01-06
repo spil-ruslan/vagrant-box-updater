@@ -1,7 +1,7 @@
 require 'yaml'
 require 'net/http'
 require 'uri'
-require 'vagrant-box-updater/util/common'
+require 'vagrant-box-updater2/util/common'
 
 module VagrantPlugins
   module BoxUpdater

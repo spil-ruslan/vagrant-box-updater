@@ -1,1 +1,1 @@
-require 'vagrant-box-updater'
+require 'vagrant-box-updater2'
