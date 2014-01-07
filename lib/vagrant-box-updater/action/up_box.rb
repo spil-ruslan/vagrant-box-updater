@@ -73,8 +73,9 @@ module VagrantPlugins
           begin
             env[:ui].info("Verify remote image data: #{box_url}")
             remote_modification_attribute = Util::Common.get_modification_attribute(box_url)
-          rescue 
+          rescue Exception => msg
             env[:ui].warn("Unable access: #{box_url}")
+            env[:ui].warn("Error: #{msg}")
             env[:ui].warn("Skip remote box check")
             @app.call(env)
             return 0
