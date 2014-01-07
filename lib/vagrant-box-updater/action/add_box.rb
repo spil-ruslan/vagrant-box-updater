@@ -17,7 +17,7 @@ module VagrantPlugins
           box_name = env[:box_name]
           begin
             modification_attribute = Util::Common.get_modification_attribute(box_url)
-          rescue Exception => msg
+          rescue => msg
             env[:ui].error("Unable access: #{box_url}")
             env[:ui].error("Error: #{msg}")
             env[:ui].error("Can not collect image status, please check box url and repeat action")
